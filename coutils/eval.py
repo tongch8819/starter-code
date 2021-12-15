@@ -49,9 +49,11 @@ def compute_numeric_gradient(f, x, dy=None, h=1e-5):
     # Compute numeric derivative dy/dx[i]
     orig = x_flat[i].item()
     x_flat[i] = orig + h
-    yph = f(x).clone().view(-1)
+    # yph = f(x).clone().view(-1)
+    yph = f(x).clone().reshape(-1)
     x_flat[i] = orig - h
-    ymh = f(x).clone().view(-1)
+    # ymh = f(x).clone().view(-1)
+    ymh = f(x).clone().reshape(-1)
     x_flat[i] = orig
     dy_dxi = (yph - ymh) / (2.0 * h) 
 
